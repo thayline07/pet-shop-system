@@ -1,0 +1,12 @@
+pre-comit:
+  commands:
+    check:
+      run: pnpm format {staged_files}
+      glob: '*.{ts,tsx,js,jsx,json,css,md,.mjs}'
+      stage_fixed: true
+
+pre-push:
+  commands:
+    validate:
+      glob: '*.{ts,tsx}'
+      run: pnpm validate:typecheck
