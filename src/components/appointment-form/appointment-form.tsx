@@ -85,7 +85,7 @@ const appointmentsFormSchema = z
 type AppointFormValues = z.infer<typeof appointmentsFormSchema>;
 
 type AppointmentFormProps = {
-  appointment: Appointment;
+  appointment?: Appointment | null;
   children?: React.ReactNode;
 };
 
@@ -146,7 +146,9 @@ export const AppointmentForm = ({
   };
 
   useEffect(() => {
-    form.reset(appointment);
+    if (appointment) {
+      form.reset(appointment);
+    }
   }, [appointment, form]);
 
   return (

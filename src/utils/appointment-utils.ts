@@ -1,3 +1,10 @@
+import {
+  Appointment,
+  AppointmentPeriod,
+  AppointmentPeriodDay,
+} from '@/src/types/appointments';
+import { Appointment as AppointmentPrisma } from '@/src/generated/prisma';
+
 export const getPeriod = (hour: number): AppointmentPeriodDay => {
   if (hour >= 9 && hour < 13) {
     return 'morning';
@@ -13,12 +20,16 @@ export function groupAppointmentsByPeriod(
 ): AppointmentPeriod[] {
   const transformedAppointments: Appointment[] =
     appointments?.map((apt) => ({
-      ...apt,
+      id: apt.id,
+      tutorName: apt.tutorName,
+      petName: apt.petName,
+      phone: apt.phone,
+      description: apt.description,
+      scheduleAt: apt.scheduledAt,
       time: apt.scheduledAt.toLocaleTimeString('pt-BR', {
         hour: '2-digit',
         minute: '2-digit',
       }),
-      service: apt.description,
       period: getPeriod(apt.scheduledAt.getHours()),
     })) || [];
 
