@@ -27,7 +27,7 @@ export function groupAppointmentsByPeriod(
       description: apt.description,
       scheduleAt: apt.scheduledAt,
       time: formatDateTime(apt.scheduledAt),
-      period: getPeriod(parseInt(formatDateTime(apt.scheduledAt)),
+      period: getPeriod(apt.scheduledAt.getHours()),
     })) || [];
 
   const morningAppointments = transformedAppointments.filter(
