@@ -1,5 +1,5 @@
 {
-  "buildCommand": "prisma generate && next build",
-  "devCommand": "next dev",
-  "installCommand": "pnpm install"
+  "buildCommand": "pnpm exec prisma generate && pnpm exec next build",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install --frozen-lockfile"
 }
