@@ -25,7 +25,7 @@ export default async function Home({
   const selectedDate = date ? parseISO(date) : new Date();
 
   let appointments: AppointmentPrisma[] = [];
-  
+
   // Only fetch from database if DATABASE_URL is available
   if (process.env.DATABASE_URL) {
     try {
@@ -50,7 +50,7 @@ export default async function Home({
 
   return (
     <div className="bg-background-primary p-6 min-h-screen">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-8 gap-4">
         <div>
           <h1 className="text-title-size text-content-primary mb-2">
             Sua Agenda

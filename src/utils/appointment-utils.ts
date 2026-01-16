@@ -26,11 +26,8 @@ export function groupAppointmentsByPeriod(
       phone: apt.phone,
       description: apt.description,
       scheduleAt: apt.scheduledAt,
-      time: apt.scheduledAt.toLocaleTimeString('pt-BR', {
-        hour: '2-digit',
-        minute: '2-digit',
-      }),
-      period: getPeriod(apt.scheduledAt.getHours()),
+      time: formatDateTime(apt.scheduledAt),
+      period: getPeriod(parseInt(formatDateTime(apt.scheduledAt)),
     })) || [];
 
   const morningAppointments = transformedAppointments.filter(
@@ -73,4 +70,13 @@ export function calculatePeriod(hour: number) {
   const isEvening = hour >= 19 && hour < 21;
 
   return { isMorning, isAfternoon, isEvening };
+}
+
+export function formatDateTime(date: Date): string {
+  return date.toLocaleString('pt-BR', {
+    day: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'America/Sao_Paulo',
+  });
 }
