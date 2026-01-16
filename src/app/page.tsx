@@ -13,6 +13,8 @@ import { Button } from '@/src/components/ui/button';
 import { endOfDay, parseISO, startOfDay } from 'date-fns';
 import { DatePicker } from '../components/date-picker';
 
+export const revalidate = 60; // Revalidate every 60 seconds (ISR)
+
 export default async function Home({
   searchParams,
 }: {
@@ -22,17 +24,27 @@ export default async function Home({
 
   const selectedDate = date ? parseISO(date) : new Date();
 
-  const appointments = await prisma.appointment.findMany({
-    where: {
-      scheduledAt: {
-        gte: startOfDay(selectedDate),
-        lte: endOfDay(selectedDate),
-      },
-    },
-    orderBy: {
-      scheduledAt: 'asc',
-    },
-  });
+  let appointments: AppointmentPrisma[] = [];
+  
+  // Only fetch from database if DATABASE_URL is available
+  if (process.env.DATABASE_URL) {
+    try {
+      appointments = await prisma.appointment.findMany({
+        where: {
+          scheduledAt: {
+            gte: startOfDay(selectedDate),
+            lte: endOfDay(selectedDate),
+          },
+        },
+        orderBy: {
+          scheduledAt: 'asc',
+        },
+      });
+    } catch (error) {
+      console.error('Failed to fetch appointments:', error);
+      appointments = [];
+    }
+  }
 
   const period = groupAppointmentsByPeriod(appointments);
 
