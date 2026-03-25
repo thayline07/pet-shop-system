@@ -1,34 +1,33 @@
 # Pet Shop Scheduler
 
-Aplicacao web para gestao de agendamentos de atendimento em pet shop.
+Aplicação web para gestao de agendamentos de atendimento em pet shop.
 
-Permite criar, listar por periodos do dia, editar e remover agendamentos com validacao de horario e prevencao de conflito de agenda.
+Permite criar, listar por períodos do dia, editar e remover agendamentos com validação de horário e prevenção de conflito de agenda.
 
 ## Links
 
-- Demo (producao): COLE_AQUI_URL_PUBLICA
-- Repositorio: COLE_AQUI_URL_GITHUB
+- Demo (producao): [vercel](https://pet-shop-system-nu.vercel.app/)
+- Repositorio: [github](https://github.com/thayline07/pet-shop-system)
 
 ## Visao Geral
 
 Este projeto foi construido com foco em:
 
-- Experiencia de uso simples para cadastro rapido
-- Regras de negocio claras para horarios permitidos
+- Experiência de uso simples para cadastro rápido
 - Estrutura moderna com App Router (Next.js)
-- Persistencia com PostgreSQL via Prisma
+- Persistência com PostgreSQL via Prisma
 
 ## Funcionalidades
 
 - Criar agendamento
 - Editar agendamento
 - Remover agendamento
-- Filtrar visualizacao por data
+- Filtrar visualização por data
 - Organizar agendamentos por periodo:
-  - Manha (09h-12h)
+  - Manhã (09h-12h)
   - Tarde (13h-18h)
   - Noite (19h-21h)
-- Bloquear horarios invalidos e conflitos de horario
+- Bloquear horários inválidos e conflitos de horário
 
 ## Stack Tecnica
 
@@ -42,11 +41,11 @@ Este projeto foi construido com foco em:
 
 ## Arquitetura (resumo)
 
-- UI e composicao de pagina: src/app e src/components
-- Regras do formulario: src/components/appointment-form
+- UI e composição de página: src/app e src/components
+- Regras do formulário: src/components/appointment-form
 - Server Actions (create/update/delete): src/app/actions.ts
-- Persistencia e cliente do banco: prisma e lib/prisma.ts
-- Utilitarios de agenda: src/utils/appointment-utils.ts
+- Persistência e cliente do banco: prisma e lib/prisma.ts
+- Utilitários de agenda: src/utils/appointment-utils.ts
 
 ## Estrutura de Pastas (essencial)
 
@@ -77,13 +76,13 @@ docker-compose.yml
 - pnpm
 - Docker Desktop em execucao
 
-### 1) Instalar dependencias
+### 1) Instalar dependências
 
 ```bash
 pnpm install
 ```
 
-### 2) Configurar variaveis de ambiente
+### 2) Configurar variáveis de ambiente
 
 Criar arquivo .env com base no .env.example.
 
@@ -99,23 +98,23 @@ DATABASE_URL="postgresql://docker:docker@localhost:5432/petshop?schema=public"
 docker compose up -d
 ```
 
-### 4) Aplicar migracoes
+### 4) Aplicar migrações
 
 ```bash
 pnpm prisma migrate deploy
 ```
 
-### 5) Rodar aplicacao
+### 5) Rodar aplicação
 
 ```bash
 pnpm dev
 ```
 
-Aplicacao disponivel em:
+Aplicação disponível em:
 
 - http://localhost:3000
 
-## Comandos Uteis
+## Comandos Úteis
 
 ```bash
 pnpm run validate:typecheck
@@ -130,13 +129,13 @@ pnpm prisma studio
 
 Causa comum: PostgreSQL local nao esta rodando.
 
-Solucao:
+Solução:
 
 ```bash
 docker compose up -d
 ```
 
-Verifique se o Docker Desktop esta aberto.
+Verifique se o Docker Desktop está aberto.
 
 ### Erro ao criar agendamento
 
@@ -145,61 +144,6 @@ Checklist:
 - DATABASE_URL configurada no .env
 - Banco ativo em localhost:5432
 - Migracoes aplicadas com sucesso
-
-## Deploy em Producao (recomendado para avaliacao)
-
-### Arquitetura recomendada
-
-- App Next.js: Vercel
-- Banco PostgreSQL: Neon ou Supabase
-
-### Passo a passo
-
-1. Criar banco PostgreSQL gerenciado.
-2. Copiar a connection string para DATABASE_URL.
-3. Importar repositorio no Vercel.
-4. Configurar variavel de ambiente DATABASE_URL no projeto.
-5. Fazer deploy.
-6. Executar migracoes no ambiente de producao.
-
-## Publicacao no GitHub
-
-### O que deve existir no repo
-
-- Codigo fonte completo
-- README atualizado
-- .env.example
-- Migracoes Prisma
-- docker-compose.yml
-
-### O que nao deve ser versionado
-
-- .env
-- pgdata
-- node_modules
-
-## Evidencias para Recrutador
-
-Para facilitar a avaliacao, inclua no topo deste README:
-
-- Link da aplicacao publicada
-- Link do repositorio
-- 2 a 4 screenshots da interface
-- Curta descricao do desafio que o projeto resolve
-
-## Diferenciais Tecnicos
-
-- Validacao de formulario no client com Zod
-- Validacao de regras de negocio no servidor
-- Revalidacao de tela apos operacoes de escrita
-- Separacao de responsabilidades entre UI, regras e persistencia
-
-## Roadmap (opcional)
-
-- Testes unitarios (utils e regras de horario)
-- Testes de integracao das server actions
-- CI com lint + typecheck + build
-- Autenticacao para multiusuario
 
 ## Autor
 
