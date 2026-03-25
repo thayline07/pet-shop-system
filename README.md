@@ -4,10 +4,24 @@ Aplicação web para gestao de agendamentos de atendimento em pet shop.
 
 Permite criar, listar por períodos do dia, editar e remover agendamentos com validação de horário e prevenção de conflito de agenda.
 
+---
+
+## Contexto do Projeto
+
+Este projeto foi desenvolvido durante um curso de Next.js da Rocketseat, com o objetivo de aplicar na prática conceitos de desenvolvimento web moderno.
+
+A aplicação simula um sistema de gerenciamento para pet shops, permitindo organizar atendimentos e estruturar o fluxo de agendamentos de forma simples e eficiente.
+
+Durante o desenvolvimento, foram explorados conceitos como componentização, organização de código e construção de interfaces com foco em usabilidade.
+
+---
+
 ## Links
 
 - Demo (producao): [vercel](https://pet-shop-system-nu.vercel.app/)
 - Repositorio: [github](https://github.com/thayline07/pet-shop-system)
+
+---
 
 ## Visao Geral
 
@@ -16,6 +30,8 @@ Este projeto foi construido com foco em:
 - Experiência de uso simples para cadastro rápido
 - Estrutura moderna com App Router (Next.js)
 - Persistência com PostgreSQL via Prisma
+
+---
 
 ## Funcionalidades
 
@@ -29,6 +45,8 @@ Este projeto foi construido com foco em:
   - Noite (19h-21h)
 - Bloquear horários inválidos e conflitos de horário
 
+---
+
 ## Stack Tecnica
 
 - Next.js 16 (App Router)
@@ -39,6 +57,8 @@ Este projeto foi construido com foco em:
 - Tailwind CSS
 - React Hook Form + Zod
 
+---
+
 ## Arquitetura (resumo)
 
 - UI e composição de página: src/app e src/components
@@ -46,6 +66,8 @@ Este projeto foi construido com foco em:
 - Server Actions (create/update/delete): src/app/actions.ts
 - Persistência e cliente do banco: prisma e lib/prisma.ts
 - Utilitários de agenda: src/utils/appointment-utils.ts
+
+---
 
 ## Estrutura de Pastas (essencial)
 
@@ -67,6 +89,8 @@ lib/
 	prisma.ts
 docker-compose.yml
 ```
+
+---
 
 ## Como Rodar Localmente
 
@@ -114,6 +138,8 @@ Aplicação disponível em:
 
 - http://localhost:3000
 
+---
+
 ## Comandos Úteis
 
 ```bash
@@ -145,8 +171,10 @@ Checklist:
 - Banco ativo em localhost:5432
 - Migracoes aplicadas com sucesso
 
+---
+
 ## Autor
 
-- Nome: SEU_NOME
-- LinkedIn: COLE_AQUI_SEU_LINKEDIN
-- Email: SEU_EMAIL
+- Nome: Thayline Inês Simioni
+- LinkedIn: [linkedin](www.linkedin.com/in/thayline-simioni-222b7b313)
+- Email: thaylinesimioni@gmail.com
