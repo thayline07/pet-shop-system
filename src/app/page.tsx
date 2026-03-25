@@ -10,7 +10,7 @@ import { groupAppointmentsByPeriod } from '@/src/utils/appointment-utils';
 import { APPOINTMENT_DATA } from '@/src/utils/mock-data';
 import { prisma } from '@/lib/prisma';
 import { Button } from '@/src/components/ui/button';
-import { endOfDay, parseISO, startOfDay } from 'date-fns';
+import { endOfDay, isValid, parseISO, startOfDay } from 'date-fns';
 import { DatePicker } from '../components/date-picker';
 
 export const revalidate = 60; // Revalidate every 60 seconds (ISR)
@@ -22,7 +22,9 @@ export default async function Home({
 }) {
   const { date } = await searchParams;
 
-  const selectedDate = date ? parseISO(date) : new Date();
+  const parsedDate = date ? parseISO(date) : null;
+  const selectedDate =
+    parsedDate && isValid(parsedDate) ? parsedDate : new Date();
 
   let appointments: AppointmentPrisma[] = [];
 
