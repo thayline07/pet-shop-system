@@ -1,9 +1,11 @@
 'use server';
 
-import { calculatePeriod, formatDateTime } from '@/src/utils/appointment-utils';
+import {
+  calculatePeriod,
+  getHourFromDateTime,
+} from '@/src/utils/appointment-utils';
 
 import { prisma } from '@/lib/prisma';
-import { error } from 'console';
 import { revalidatePath } from 'next/cache';
 import z from 'zod';
 
@@ -12,7 +14,7 @@ const appointmentsSchema = z.object({
   petName: z.string(),
   phone: z.string(),
   description: z.string(),
-  scheduledAt: z.date(),
+  scheduledAt: z.coerce.date(),
 });
 
 type AppointmentData = z.infer<typeof appointmentsSchema>;
@@ -22,14 +24,15 @@ export async function createAppointment(data: any) {
     const parsedData = appointmentsSchema.parse(data);
 
     const { scheduledAt } = parsedData;
-    const hour = parseInt(formatDateTime(scheduledAt));
+    const hour = getHourFromDateTime(scheduledAt);
 
     const { isMorning, isAfternoon, isEvening } = calculatePeriod(hour);
 
     if (!isMorning && !isAfternoon && !isEvening) {
-      throw new Error(
-        'Agendamentos só podem ser feitos entre 9h-12h, 13h-18h e 19h-21h'
-      );
+      return {
+        error:
+          'Agendamentos só podem ser feitos entre 9h-12h, 13h-18h e 19h-21h',
+      };
     }
 
     const existingAppointments = await prisma.appointment.findFirst({
@@ -39,7 +42,9 @@ export async function createAppointment(data: any) {
     });
 
     if (existingAppointments) {
-      throw new Error('Já existe um agendamento para este horário.');
+      return {
+        error: 'Já existe um agendamento para este horário.',
+      };
     }
 
     await prisma.appointment.create({
@@ -51,7 +56,9 @@ export async function createAppointment(data: any) {
     revalidatePath('/');
   } catch (error) {
     console.error('Erro ao criar agendamento:', error);
-    throw error;
+    return {
+      error: 'Erro ao criar agendamento.',
+    };
   }
 }
 
@@ -60,7 +67,7 @@ export async function updateAppointment(id: string, data: AppointmentData) {
     const parsedData = appointmentsSchema.parse(data);
 
     const { scheduledAt } = parsedData;
-    const hour = parseInt(formatDateTime(scheduledAt));
+    const hour = getHourFromDateTime(scheduledAt);
 
     const { isMorning, isAfternoon, isEvening } = calculatePeriod(hour);
 

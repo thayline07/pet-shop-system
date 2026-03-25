@@ -65,18 +65,28 @@ export function groupAppointmentsByPeriod(
 }
 
 export function calculatePeriod(hour: number) {
-  const isMorning = hour >= 9 && hour < 12;
-  const isAfternoon = hour >= 13 && hour < 18;
-  const isEvening = hour >= 19 && hour < 21;
+  const isMorning = hour >= 9 && hour <= 12;
+  const isAfternoon = hour >= 13 && hour <= 18;
+  const isEvening = hour >= 19 && hour <= 21;
 
   return { isMorning, isAfternoon, isEvening };
 }
 
 export function formatDateTime(date: Date): string {
   return date.toLocaleString('pt-BR', {
-    day: '2-digit',
+    hour: '2-digit',
     minute: '2-digit',
     hour12: false,
     timeZone: 'America/Sao_Paulo',
   });
+}
+
+export function getHourFromDateTime(date: Date): number {
+  const formatter = new Intl.DateTimeFormat('pt-BR', {
+    hour: '2-digit',
+    hour12: false,
+    timeZone: 'America/Sao_Paulo',
+  });
+
+  return Number(formatter.format(date));
 }
