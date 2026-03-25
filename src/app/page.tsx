@@ -1,13 +1,7 @@
 import { AppointmentForm } from '../components/appointment-form';
 import { PeriodSection } from '../components/period-section';
 import { Appointment as AppointmentPrisma } from '../generated/prisma';
-import {
-  Appointment,
-  AppointmentPeriod,
-  AppointmentPeriodDay,
-} from '../types/appointments';
 import { groupAppointmentsByPeriod } from '@/src/utils/appointment-utils';
-import { APPOINTMENT_DATA } from '@/src/utils/mock-data';
 import { prisma } from '@/lib/prisma';
 import { Button } from '@/src/components/ui/button';
 import { endOfDay, isValid, parseISO, startOfDay } from 'date-fns';
@@ -28,7 +22,6 @@ export default async function Home({
 
   let appointments: AppointmentPrisma[] = [];
 
-  // Only fetch from database if DATABASE_URL is available
   if (process.env.DATABASE_URL) {
     try {
       appointments = await prisma.appointment.findMany({
