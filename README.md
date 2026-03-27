@@ -18,12 +18,12 @@ Durante o desenvolvimento, foram explorados conceitos como componentização, or
 
 ## Links
 
-- Demo (producao): [vercel](https://pet-shop-system-nu.vercel.app/)
+- Demo: [vercel](https://pet-shop-system-nu.vercel.app/)
 - Repositorio: [github](https://github.com/thayline07/pet-shop-system)
 
 ---
 
-## Visao Geral
+## Visão Geral
 
 Este projeto foi construido com foco em:
 
