@@ -176,5 +176,5 @@ Checklist:
 ## Autor
 
 - Nome: Thayline Inês Simioni
-- LinkedIn: [linkedin](www.linkedin.com/in/thayline-simioni-222b7b313)
+- LinkedIn: (www.linkedin.com/in/thayline-simioni-222b7b313)
 - Email: thaylinesimioni@gmail.com
